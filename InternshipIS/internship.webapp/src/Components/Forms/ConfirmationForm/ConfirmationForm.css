@@ -1,0 +1,32 @@
+.button-custom {
+    padding: 10px 20px;
+    border-radius: 0px;
+    border: 1px solid white;
+    background-color: #00b7cf;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color .2s ease-in-out;
+    max-width: 20vh;
+    width: 100%;
+}
+
+.form-custom {
+    font-family: Roboto, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+    margin-top: 1vh;
+}
+
+.message-custom {
+    font-size: larger;
+    align-self: center;
+    color: #717171;
+}

@@ -1,0 +1,80 @@
+services:
+  authorizationservice:
+    ports:
+      - "5000:8080"
+      - "5001:8081"
+    image: ${DOCKER_REGISTRY-}authorizationservice
+    build:
+      context: .
+      dockerfile: AuthorizationService/Dockerfile
+    depends_on: 
+       - rabbitmq
+    extra_hosts:
+      - "praxeosu.cz: 192.168.1.230"
+      - "sqlhost: 192.168.1.230"
+
+  notificationservice:
+    ports:
+      - "5002:8090"
+      - "5003:8091"
+    image: ${DOCKER_REGISTRY-}notificationservice
+    build:
+      context: .
+      dockerfile: NotificationService/Dockerfile
+    depends_on: 
+       - rabbitmq
+
+  internshipservice:
+    ports:
+      - "5004:8070"
+      - "5005:8071"
+    image: ${DOCKER_REGISTRY-}internshipservice
+    build:
+      context: .
+      dockerfile: InternshipService/Dockerfile
+    volumes:
+       - "C:/data:/app/data"
+    depends_on: 
+       - rabbitmq
+    extra_hosts:
+      - "praxeosu.cz: 192.168.1.230"
+      - "sqlhost: 192.168.1.230"
+
+  client:
+    image: ${DOCKER_REGISTRY-}client
+    build:
+     context: .
+     dockerfile: internship.webapp/Dockerfile
+     args:
+        VITE_INTERNSHIPS_API_BASE_URL: https://praxeosu.cz:5005
+        VITE_AUTH_API_BASE_URL: https://praxeosu.cz:5001
+    ports:
+      - "443:443"
+    volumes:
+      - ./internship.webapp/ssl/praxeosucz.crt:/etc/nginx/ssl/praxeosucz:ro
+      - ./internship.webapp/ssl/praxeosucz.key:/etc/nginx/ssl/private/praxeosucz:ro
+      - ssl:/etc/ssl
+    environment:
+      - NODE_ENV=production
+      - HTTPS=true
+      - VITE_INTERNSHIPS_API_BASE_URL=https://praxeosu.cz:5005
+      - VITE_AUTH_API_BASE_URL=https://praxeosu.cz:5001
+    extra_hosts:
+      - "praxeosu.cz: 192.168.1.230"
+
+  rabbitmq:
+    container_name: rabbitmq
+    hostname: rabbitmq
+    image: rabbitmq:3-management-alpine
+    ports:
+      - "7100:15672"
+      - "7101:5672"
+    environment:
+        RABBITMQ_DEFAULT_USER: guest
+        RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq:/rabbitmq
+
+volumes:
+    rabbitmq:
+    ssl:   

@@ -1,0 +1,90 @@
+.form-custom {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 1vh;
+    min-height: 27vh;
+    justify-content: flex-end;
+    align-items: stretch;
+}
+
+.content {
+    max-width: 1800px;
+    font-family: 'Roboto', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 1vh;
+    max-height: 1050px;
+    height: 100%;
+}
+
+.table-container {
+    max-height: 1000px;
+    overflow-y: auto;
+}
+
+.table {
+    max-width: 1700px;
+    border-collapse: collapse;
+    cursor: pointer;
+}
+
+.table-thead-custom {
+        position: sticky;
+        top: 0;
+        background-color: #f9f9f9;
+        z-index: 1;
+        padding: 10px;
+        border-bottom: 2px solid #ddd;
+}
+
+.title-custom {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #4e5e6d;
+    text-align: center;
+}
+
+.scroll-container {
+    scrollbar-color: #d1d1d1 #f0f0f0;
+    scrollbar-width: thin;
+}
+
+.button-custom {
+    padding: 10px 20px;
+    border-radius: 0px;
+    border: 1px solid white;
+    background-color: #00b7cf;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color .2s ease-in-out;
+    max-width: 20vh;
+    width: 100%;
+}
+
+.head-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+@media (max-width: 441px) {
+    .head-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}

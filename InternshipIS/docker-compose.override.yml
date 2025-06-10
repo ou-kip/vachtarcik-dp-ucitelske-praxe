@@ -1,0 +1,41 @@
+services:
+  authorizationservice:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+  notificationservice:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8090
+      - ASPNETCORE_HTTPS_PORTS=8091
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+  internshipservice:
+   environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8070
+      - ASPNETCORE_HTTPS_PORTS=8071
+   volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+  client:
+    build:
+      context: ./internship.webapp
+      dockerfile: Dockerfile
+      args:
+        VITE_INTERNSHIPS_API_BASE_URL: https://praxeosu.cz:5005
+        VITE_AUTH_API_BASE_URL: https://praxeosu.cz:5001
+    environment:
+      - HTTPS=true
+      - SSL_CRT_FILE=/etc/nginx/ssl/praxeosucz.crt
+      - SSL_KEY_FILE=/etc/nginx/ssl/private/praxeosucz.key
+      - VITE_INTERNSHIPS_API_BASE_URL=https://praxeosu.cz:5005
+      - VITE_AUTH_API_BASE_URL=https://praxeosu.cz:5001

@@ -1,0 +1,30 @@
+.input-container {
+    margin-bottom: 15px;
+}
+
+.input-title {
+    color: #717171;
+    text-align: left;
+    margin: 0;
+    font-size: 16px;
+}
+
+.scroll-container {
+    scrollbar-color: #d1d1d1 #f0f0f0;
+    scrollbar-width: thin;
+    overflow-y: scroll;
+    max-height: 400px;
+}
+
+.table-centered {
+    text-align: center;
+}
+
+.table-thead-custom {
+    position: sticky;
+    top: 0;
+    background-color: #f9f9f9;
+    z-index: 1;
+    padding: 10px;
+    border-bottom: 2px solid #ddd;
+}

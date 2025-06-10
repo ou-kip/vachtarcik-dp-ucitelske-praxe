@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Export Praxe</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #474747;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            margin: 10mm auto;
+            background: white;
+            box-sizing: border-box;
+            page-break-after: always;
+        }
+
+        h1, h2, h3 {
+            margin-top: 0;
+        }
+
+        .no-break {
+            page-break-inside: avoid;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        ul {
+            margin-top: 0.5em;
+            padding-left: 1.2em;
+        }
+
+        @media print {
+            body {
+                background: none;
+            }
+
+            .page {
+                box-shadow: none;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <h1>Praxe: {{INTERNSHIP_NAME}}</h1>
+
+        <div class="section">
+            <p>
+                <span class="label">ID praxe:</span> {{INTERNSHIP_ID}}
+                <a href="{{TASK_URL}}" target="_blank">(Otevřít task)</a>
+            </p>
+            <p><span class="label">Firma:</span> {{COMPANY}}</p>
+            <p><span class="label">Kontaktní osoby:</span> {{CONTACTS}}</p>
+            <p><span class="label">Učitelé:</span> {{TEACHERS}}</p>
+            <p><span class="label">Student:</span> {{STUDENT}}</p>
+            <p><span class="label">Popis praxe:</span> {{DESCRIPTION}}</p>
+        </div>
+
+        <div class="section">
+            <h2>Historie stavů:</h2>
+            {{STATES_LIST}}
+        </div>
+    </div>
+
+    {{TASK_PAGES}}
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+.nav-link:hover {
+    color: #00b7cf !important;
+    border-bottom: 3px solid #23B9D7 !important;
+    /* color: #ef6c02 !important; */
+}
+.nav-link-fixed {
+    color: #000; /* Výchozí barva odkazu */
+    border-bottom: 3px solid white !important; /* Pøedem rezervujte místo pro border */
+    transition: color 0.3s ease, border-color 0.3s ease !important; /* Plynulá animace */
+}
+
+.navbar {
+    height: auto;
+}
+
+@media (width > 1024px) {
+    .navbar {
+        height: 70px;
+    }
+    .nav-link {
+        height: 70px;
+        text-align: center;
+        padding-top: 2.5vh !important;
+    }
+}
+
+.border-custom {
+    border-color: #00b7cf !important;
+}
+
+@media (width < 1024px) {
+    .border-custom {
+        border: none;
+    }
+}
+
+.text-blue {
+    color: #00b7cf !important;
+}

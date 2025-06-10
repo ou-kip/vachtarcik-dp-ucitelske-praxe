@@ -1,0 +1,11 @@
+.description-child {
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    background-color: #f0f2f5;
+    box-sizing: border-box;
+    color: #515151;
+    resize: none;
+    height: 15vh;
+}

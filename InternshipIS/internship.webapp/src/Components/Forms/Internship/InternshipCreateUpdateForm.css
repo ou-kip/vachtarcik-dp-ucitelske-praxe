@@ -1,0 +1,324 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+    width: 100%;
+    max-width: 1000px;
+    box-sizing: border-box;
+    margin-top: 1vh;
+    overflow-y: auto;
+}
+
+.input-container {
+    margin-bottom: 15px;
+}
+
+.input {
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    background-color: #f0f2f5;
+    box-sizing: border-box;
+    color: #515151;
+}
+
+.button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
+    background-color: #00b7cf;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: flex-end;
+    transition: background-color 0.3s ease;
+}
+
+    .button:hover {
+        background-color: #0090a6;
+    }
+
+.linkButton {
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
+    background-color: #00b7cf;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1vh;
+}
+
+    .linkButton:hover {
+        background-color: #0090a6;
+    }
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #4e5e6d;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 21px;
+    margin-bottom: 10px;
+    color: #4e5e6d;
+    text-align: center;
+}
+
+.input-title {
+    color: #717171;
+    text-align: left;
+    margin: 0;
+    font-size: 16px;
+}
+
+.description {
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    background-color: #f0f2f5;
+    box-sizing: border-box;
+    color: #515151;
+    resize: none;
+    height: 25vh;
+}
+
+.table-container {
+    margin-top: 16px;
+    overflow-x: auto;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+    .styled-table th,
+    .styled-table td {
+        padding: 12px 16px;
+        text-align: left;
+    }
+
+    .styled-table th {
+        background-color: #f0f2f5;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .styled-table tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        .styled-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .styled-table tr:hover {
+            background-color: #e6f7ff;
+        }
+
+.remove-button {
+    background-color: #ff4d4f;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .remove-button:hover {
+        background-color: #d9363e;
+    }
+
+.submit-button {
+    background-color: #1890ff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .submit-button:hover {
+        background-color: #40a9ff;
+    }
+
+.scroll-container {
+    scrollbar-color: #d1d1d1 #f0f0f0;
+    scrollbar-width: thin;
+}
+
+.link-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.remove-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .remove-button:hover {
+        background-color: #d32f2f;
+    }
+
+.multi-step-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 1vh;
+    min-height: 27vh;
+    justify-content: flex-end;
+    align-items: stretch;
+    max-height: 1000px;
+    height: 100%;
+}
+
+.step-header {
+    display: flex;
+    justify-content: space-around;
+    background-color: #f0f2f5;
+    border-radius: 8px 8px 0 0;
+}
+
+.step {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #eff2f5;
+    transition: background 0.3s ease;
+    font-size: 16px;
+    text-align: center;
+    color: #515151;
+    width: 15vw;
+}
+
+    .step.active {
+        background-color: #00b7cf;
+        color: white;
+        font-weight: bold;
+    }
+
+.form-content {
+    flex-grow: 1;
+    padding-top: 2vh;
+    border-radius: 8px;
+    background: #fff;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+h3 {
+    font-size: 21px;
+    color: #4e5e6d;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #f0f2f5;
+    box-sizing: border-box;
+    color: #515151;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+textarea {
+    height: 100px;
+    resize: none;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
+    background-color: #00b7cf;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    button:hover {
+        background-color: #0090a6;
+    }
+
+    button:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+    }
+
+.button-finish {
+    background-color: #00cf79;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+    .button-finish:hover {
+        background-color: #00a659;
+    }
+
+.linkButton-sm {
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
+    background-color: #00b7cf;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .linkButton-sm:hover {
+        background-color: #0090a6;
+    }
+.mb-2vh{
+    margin-bottom: 2vh;
+}
