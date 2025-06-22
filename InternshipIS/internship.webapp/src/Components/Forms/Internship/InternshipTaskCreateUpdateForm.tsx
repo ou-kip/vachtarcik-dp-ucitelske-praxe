@@ -6,13 +6,13 @@ import { UploadedFile } from '../../Exports/UploadedFile';
 import CustomCheckbox from '../../Inputs/Checkbox/Checkbox';
 import TaskStateSelect from '../../Inputs/TaskStateSelect/TaskStateSelect';
 
-interface InternshipTaskListFormProps {
+interface InternshipTaskCreateUpdateProps {
     internshipId: string | null;
     isUpdate: boolean;
     taskId: string | null;
     onSubmitted: () => void;
 }
-const InternshipTaskCreateUpdateForm: React.FC<InternshipTaskListFormProps> = ({ internshipId, isUpdate, taskId, onSubmitted }) => {
+const InternshipTaskCreateUpdateForm: React.FC<InternshipTaskCreateUpdateProps> = ({ internshipId, isUpdate, taskId, onSubmitted }) => {
     const [formData, setFormData] = useState<{
         id: string | null;
         name: string;

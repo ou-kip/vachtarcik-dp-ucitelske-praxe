@@ -3,7 +3,6 @@ import '../css/Dashboard.css'
 import { useAuth } from '../Components/Exports/UseAuth'
 import MainMenu from '../Components/Menu/MainMenu'
 import InternshipCreateUpdateForm from "../Components/Forms/Internship/InternshipCreateUpdateForm";
-import InternshipTasksForm from "../Components/Forms/Internship/InternshipTasksForm";
 import { useSearchParams } from "react-router-dom";
 import SystemMessageForm from '../Components/Forms/SystemMessageForm/SystemMessageForm';
 
@@ -11,16 +10,12 @@ import SystemMessageForm from '../Components/Forms/SystemMessageForm/SystemMessa
 const InternshipUpdate: React.FC = () => {
     const { isAuthenticated } = useAuth();
     const [searchParams] = useSearchParams();
-    let id = searchParams.get("id");
     const internshipId = searchParams.get("internshipId");
-
     const navigate = useNavigate();
 
     const handleSuccess = (createdId: string | null) => {
         console.log('Navigace volána s ID:', createdId);
-        navigate(`/internship/edit?id=${createdId}`, { replace: true });
-
-        id = searchParams.get("id");
+        navigate(`/internship/detail?internshipId=${createdId}`, { replace: true });
     };
 
     if (!isAuthenticated) {
@@ -35,7 +30,7 @@ const InternshipUpdate: React.FC = () => {
         <div>
             <MainMenu />
             <div className="main-style">
-                {id ? (<InternshipTasksForm internshipId={id} isUpdate={true} />) : (<InternshipCreateUpdateForm isUpdate={true} onSuccess={handleSuccess} internshipId={internshipId} />)}
+                <InternshipCreateUpdateForm isUpdate={true} onSuccess={handleSuccess} internshipId={internshipId} />
             </div>
         </div>
     );

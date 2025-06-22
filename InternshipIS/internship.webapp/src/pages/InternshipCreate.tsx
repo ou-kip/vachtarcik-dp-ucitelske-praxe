@@ -2,23 +2,16 @@
 import { useAuth } from '../Components/Exports/UseAuth'
 import MainMenu from '../Components/Menu/MainMenu'
 import InternshipCreateUpdateForm from "../Components/Forms/Internship/InternshipCreateUpdateForm";
-import InternshipTasksForm from "../Components/Forms/Internship/InternshipTasksForm";
-import { useSearchParams } from "react-router-dom";
 import SystemMessageForm from '../Components/Forms/SystemMessageForm/SystemMessageForm';
 
 
 const InternshipCreate: React.FC = () => {
     const { isAuthenticated } = useAuth();
-    const [searchParams] = useSearchParams();
-    let id = searchParams.get("id");
-
     const navigate = useNavigate();
 
     const handleSuccess = (createdId: string | null) => {
         console.log('Navigace volána s ID:', createdId);
-        navigate(`/internship/create?id=${createdId}`, { replace: true });
-
-        id = searchParams.get("id");
+        navigate(`/internship/detail?internshipId=${createdId}`, { replace: true });
     };
 
     if (!isAuthenticated) {
@@ -33,7 +26,7 @@ const InternshipCreate: React.FC = () => {
         <div>
             <MainMenu />
             <div className="main-style">
-                {id ? (<InternshipTasksForm internshipId={id} isUpdate={false} />) : (<InternshipCreateUpdateForm isUpdate={false} onSuccess={handleSuccess} internshipId = {null} />) }
+                <InternshipCreateUpdateForm isUpdate={false} onSuccess={handleSuccess} internshipId = {null} />
             </div>
         </div>
     );
