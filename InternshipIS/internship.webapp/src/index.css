@@ -234,3 +234,36 @@ body {
     display: flex;
     justify-content: flex-start;
 }
+
+.content {
+    max-width: 1800px;
+    font-family: 'Roboto', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 1vh;
+    max-height: 1050px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.content-height-scalable {
+    max-width: 1800px;
+    font-family: 'Roboto', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 1vh;
+    max-height: 1050px;
+    overflow-y: auto;
+}

@@ -2,8 +2,6 @@
 import './InternshipDetailForm.css'
 import { InternshipDetail } from '../../../Exports/InternshipDetail';
 import axios from 'axios';
-import InternshipTaskListForm from '../InternshipTaskListForm';
-import { useNavigate } from 'react-router-dom';
 
 interface InternshipDetailFormProps {
     internshipId: string | null;
@@ -23,9 +21,6 @@ interface ApiResponse {
 
 const InternshipDetailForm: React.FC<InternshipDetailFormProps> = ({ internshipId }) => {
     const [detail, setDetail] = useState<InternshipDetail>();
-    const navigate = useNavigate();
-    const taskListRefreshKey = 0;
-    const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
 
     axios.defaults.baseURL = 'https://praxeosu.cz:5005';
 
@@ -42,13 +37,6 @@ const InternshipDetailForm: React.FC<InternshipDetailFormProps> = ({ internshipI
         fetchData();
     }, [internshipId]);
 
-    useEffect(() => {
-        if (selectedTaskId) {
-            navigate(`/task/detail?taskId=${selectedTaskId}`);
-        }
-
-    }, [selectedTaskId, navigate])
-
     const ResolveState = (state: number | undefined) => {
         switch (state) {
             case 0: return "Vytvořeno";
@@ -57,10 +45,6 @@ const InternshipDetailForm: React.FC<InternshipDetailFormProps> = ({ internshipI
             case 3: return "Uzavřeno";
             case 4: return "Zrušeno"
         }
-    }
-
-    const navigateToTaskDetail = (taskId: string | null) => {
-        setSelectedTaskId(taskId);
     }
 
     const handleExportDownload = async (internship: InternshipDetail | null) => {
@@ -107,7 +91,7 @@ const InternshipDetailForm: React.FC<InternshipDetailFormProps> = ({ internshipI
     };
 
     return (
-        <div className="content">
+        <div className="content-height-scalable">
             <h1 className="title-custom">{detail?.name}</h1>
 
             {detail?.state !== undefined && detail.state === 3 && (
@@ -182,9 +166,6 @@ const InternshipDetailForm: React.FC<InternshipDetailFormProps> = ({ internshipI
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="row">
-                    <InternshipTaskListForm internshipId={internshipId} isUpdate={true} listRefreshKey={taskListRefreshKey} onRowEdit={navigateToTaskDetail} />
                 </div>
                 <div className="row">
                     <div className="col-md-6">

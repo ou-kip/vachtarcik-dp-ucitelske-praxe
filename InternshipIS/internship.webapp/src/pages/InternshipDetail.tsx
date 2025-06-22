@@ -1,8 +1,9 @@
 ﻿import { useAuth } from '../Components/Exports/UseAuth'
 import MainMenu from '../Components/Menu/MainMenu'
-import InternshipDetailForm from "../Components/Forms/Internship/Detail/InternshipDetailForm";
+/*import InternshipDetailForm from "../Components/Forms/Internship/Detail/InternshipDetailForm";*/
 import { useSearchParams } from "react-router-dom";
 import SystemMessageForm from '../Components/Forms/SystemMessageForm/SystemMessageForm';
+import InternshipOverview from '../Components/Forms/Internship/Overview/InternshipOverview';
 
 const InternshipDetail: React.FC = () => {
     const { isAuthenticated } = useAuth();
@@ -20,8 +21,8 @@ const InternshipDetail: React.FC = () => {
     return (
         <div>
             <MainMenu />
-            <div className="main-style">
-                <InternshipDetailForm internshipId={id} />
+            <div className="main-dashboard">
+                <InternshipOverview internshipId={id} />
             </div>
         </div>
     );

@@ -5,6 +5,7 @@ import axios from 'axios';
 import TaskSubmissionForm from '../Submission/TaskSubmissionForm';
 import TaskSubmissionDetailForm from '../Submission/Detail/TaskSubmissionDetailForm';
 import { AllowedActions } from '../../../Exports/AllowedActions'; 
+import { AllowedActionsApiResponse } from '../../../Exports/AllowedActionsApiResponse'; 
 
 interface TaskDetailFormProps {
     taskId: string | null;
@@ -15,18 +16,6 @@ interface ApiResponse {
     message: string | null;
     data: {
         task: TaskDetail;
-        statusCode: number;
-        message: string | null;
-    };
-    errors: string[];
-    hasErrors: boolean;
-}
-
-interface AllowedApiResponse {
-    statusCode: number;
-    message: string | null;
-    data: {
-        allowedActions: AllowedActions;
         statusCode: number;
         message: string | null;
     };
@@ -61,7 +50,7 @@ const TaskDetailForm: React.FC<TaskDetailFormProps> = ({ taskId }) => {
             if (!detail?.internshipId) return;
 
             try {
-                const allowedResponse = await axios.get<AllowedApiResponse>(
+                const allowedResponse = await axios.get<AllowedActionsApiResponse>(
                     '/api/v1/internship/get/allowedactions',
                     {
                         params: { internshipId: detail.internshipId },
