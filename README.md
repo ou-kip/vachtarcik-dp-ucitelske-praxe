@@ -1,5 +1,11 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+Zadavatel Ostravská Univerzita (OSU) v rámci studijních oborů bude studentům nabízet / požadovat firemní praxe, které si v rámci dané katedry / oboru mohou vybrat. Tyto praxe musí být dokumentovány, reportované a kontrolované pověřenými osobami, nebo učiteli v rámci informačního systému.
+
+## Zainteresované strany
+* Ostravská univerzita (KCH a KIP, administrátoři, učitelé, studenti)
+* Firmy (jako zadavatelé praxí, pověřené osoby za firmy)
+* Vývojář (Lukáš Vachtarčík)
+
 
 # Getting Started
 TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
@@ -8,13 +14,6 @@ TODO: Guide users through getting your code up and running on their own system. 
 3.	Latest releases
 4.	API references
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
-
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+# Nasazení
+Pro spuštění projektu a jeho úspešné kontejnerizaci, je potřeba upravit v docker-compose hodnotu proměnné `sqlhost` na ip adresu hosta.
+Compose je kompatibilní jak pro kontejnerizaci v Dockeru tak v Podmanu, avšak z důvodů některých nekompatibilit a inkonzistence chování Podmana je adresa hostitele řešena takto.
