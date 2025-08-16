@@ -16,11 +16,9 @@ Zadavatel Ostravská Univerzita (OSU) v rámci studijních oborů bude studentů
 
 Nastavení proměnných pro správný běch aplikace:
 
-SERVER_NAME= doména serveru shodná s doménou certifikátu. Př. praxe.osu.cz, praxe.cz apod.
-SERVER_IP= IP adresa hostitele (tam, kde je spuštěný Podman / Docker)
-
-SQL_HOST= alias, pomocná proměnná, může být cokoli. Př. sqlhost..
-SQL_HOST_IP= adresa DB serveru
-
-SSL_PATH= cesta k certifikátu pro backed
-SSL_PASSWORD= passphrase certifikátu
+* `SERVER_NAME` = doména serveru shodná s doménou certifikátu. Př. praxe.osu.cz, praxe.cz apod.
+* `SERVER_IP` = IP adresa hostitele (tam, kde je spuštěný Podman / Docker)
+* `SQL_HOST` = alias, pomocná proměnná, může být cokoli. Př. sqlhost..
+* `SQL_HOST_IP` = adresa DB serveru
+* `SSL_PATH` = cesta k certifikátu pro backed
+* `SSL_PASSWORD` = passphrase certifikátu
