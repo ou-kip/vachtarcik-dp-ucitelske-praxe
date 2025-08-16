@@ -15,6 +15,7 @@ Zadavatel Ostravská Univerzita (OSU) v rámci studijních oborů bude studentů
 # Nasazení
 
 Nastavení proměnných pro správný běch aplikace:
+
 SERVER_NAME= doména serveru shodná s doménou certifikátu. Př. praxe.osu.cz, praxe.cz apod.
 SERVER_IP= IP adresa hostitele (tam, kde je spuštěný Podman / Docker)
 
