@@ -30,6 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Database\Sql\AdminLoginSeed.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Database\Sql\RolesDataSeed.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
