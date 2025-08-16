@@ -179,7 +179,17 @@ namespace InternshipService
             services.AddSingleton<IInternshipTaskSolutionEntityConfiguration, InternshipTaskSolutionEntityConfiguration>();
             services.AddSingleton<IInternshipTaskSolutionFileEntityConfiguration, InternshipTaskSolutionFileEntityConfiguration>();
 
-            services.Configure<DatabaseOptions>(options => configuration.GetSection(nameof(DatabaseOptions)).Bind(options));
+            services.Configure<DatabaseOptions>(options =>
+            {
+                configuration.GetSection(nameof(DatabaseOptions)).Bind(options);
+
+                var sqlHost = Environment.GetEnvironmentVariable("SQL_HOST");
+                if (!string.IsNullOrEmpty(sqlHost))
+                {
+                    options.ConnectionString = options.ConnectionString.Replace("SQL_HOST_PLACEHOLDER", sqlHost);
+                }
+            });
+
             services.AddDbContext<InternshipDbContext>((serviceProvider, options) =>
             {
                 var dbOptions = serviceProvider.GetRequiredService<IOptions<DatabaseOptions>>();

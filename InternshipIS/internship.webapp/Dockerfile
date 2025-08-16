@@ -1,33 +1,27 @@
-# Krok 1: Build stage
 FROM node:18-alpine AS build
 
-# Nastav pracovnÌ adres·¯
 WORKDIR /app
 
-# ZkopÌruj package.json a package-lock.json
 COPY package*.json ./
-
-# Nainstaluj z·vislosti
 RUN npm install
 
-# ZkopÌruj vöechny soubory aplikace
 COPY . .
 
 ARG VITE_INTERNSHIPS_API_BASE_URL
 ARG VITE_AUTH_API_BASE_URL
-ENV VITE_INTERNSHIPS_API_BASE_URL=VITE_INTERNSHIPS_API_BASE_URL
+ENV VITE_INTERNSHIPS_API_BASE_URL=$VITE_INTERNSHIPS_API_BASE_URL
 ENV VITE_AUTH_API_BASE_URL=$VITE_AUTH_API_BASE_URL
 
-# Buildni aplikaci
 RUN npm run build
 
-# Krok 2: Production stage
-FROM nginx:alpine
+FROM nginx:1.19-alpine
 
-# ZkopÌruj buildnutou aplikaci do NGINX
+RUN apk add --no-cache gettext
+
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Nastav SSL certifik·ty
+COPY nginx.conf.template /etc/nginx/templates/nginx.conf.template
+
 COPY ssl/praxeosucz.crt /etc/nginx/ssl/praxeosucz.crt
 COPY ssl/praxeosucz.key /etc/nginx/ssl/private/praxeosucz.key
 COPY ssl/praxeosu.czCA.crt /etc/nginx/ssl/praxeosuczCA.crt
@@ -36,11 +30,7 @@ RUN chmod 644 /etc/nginx/ssl/praxeosucz.crt
 RUN chmod 644 /etc/nginx/ssl/praxeosuczCA.crt 
 RUN chmod 600 /etc/nginx/ssl/private/praxeosucz.key
 
-# Konfigurace NGINX pro HTTPS
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+CMD envsubst '$SERVER_NAME' < /etc/nginx/templates/nginx.conf.template > /etc/nginx/conf.d/default.conf \
+    && nginx -g 'daemon off;'
 
-# Exponuj HTTPS port
 EXPOSE 443
-
-# Spusù NGINX
-CMD ["nginx", "-g", "daemon off;"]

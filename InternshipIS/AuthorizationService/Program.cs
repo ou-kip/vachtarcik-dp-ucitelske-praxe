@@ -6,10 +6,12 @@ using Identity;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 
+var sslPath = Environment.GetEnvironmentVariable("SSL_PATH")!;
+var sslPassword = Environment.GetEnvironmentVariable("SSL_PASSWORD")!;
+
 var builder = WebApplication.CreateBuilder(args);
 
-var cert = new X509Certificate2("/app/Ssl/praxeosucz.pfx", "testing");
-
+var cert = new X509Certificate2(sslPath, sslPassword);
 builder.WebHost.ConfigureKestrel(options =>
 {    
     options.ListenAnyIP(8081, listenOptions =>

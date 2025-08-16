@@ -36,7 +36,17 @@ namespace Identity
             services.AddScoped<IRoleEntityConfiguration, RoleEntityConfiguration>();
             services.AddScoped<IUserEntityConfiguration, UserEntityConfiguration>();
 
-            services.Configure<AuthorizationOptions>(options => configuration.GetSection(nameof(AuthorizationOptions)).Bind(options));
+            services.Configure<AuthorizationOptions>(options =>
+            {
+                configuration.GetSection(nameof(AuthorizationOptions)).Bind(options);
+
+                var sqlHost = Environment.GetEnvironmentVariable("SQL_HOST");
+                if (!string.IsNullOrEmpty(sqlHost))
+                {
+                    options.ConnectionString = options.ConnectionString.Replace("SQL_HOST_PLACEHOLDER", sqlHost);
+                }
+            });
+
             services.AddDbContext<AuthorizationDbContext>((serviceProvider, options) =>
             {
                 var authorizationOptions = serviceProvider.GetRequiredService<IOptions<AuthorizationOptions>>();
