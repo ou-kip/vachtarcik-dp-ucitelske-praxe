@@ -6,14 +6,12 @@ Zadavatel Ostravská Univerzita (OSU) v rámci studijních oborů bude studentů
 * Firmy (jako zadavatelé praxí, pověřené osoby za firmy)
 * Vývojář (Lukáš Vachtarčík)
 
-
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+# Prerequisities
+* .NET 8
+* Installed podman with superuser behaviour or Docker
+* MS SQL Server
+* Installed certificates for both backend services and frontend. Otherwise NGINX will not establish secured connection.
 
 # Nasazení
-Pro spuštění projektu a jeho úspešné kontejnerizaci, je potřeba upravit v docker-compose hodnotu proměnné `sqlhost` na ip adresu hosta.
+Pro spuštění projektu a jeho úspešné kontejnerizaci, je potřeba upravit v docker-compose hodnotu proměnné `sqlhost` na ip adresu hosta pro správný běh a napojení na DB.
 Compose je kompatibilní jak pro kontejnerizaci v Dockeru tak v Podmanu, avšak z důvodů některých nekompatibilit a inkonzistence chování Podmana je adresa hostitele řešena takto.
