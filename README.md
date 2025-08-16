@@ -13,5 +13,13 @@ Zadavatel Ostravská Univerzita (OSU) v rámci studijních oborů bude studentů
 * Installed certificates for both backend services and frontend. Otherwise NGINX will not establish secured connection.
 
 # Nasazení
-Pro spuštění projektu a jeho úspešné kontejnerizaci, je potřeba upravit v docker-compose hodnotu proměnné `sqlhost` na ip adresu hosta pro správný běh a napojení na DB.
-Compose je kompatibilní jak pro kontejnerizaci v Dockeru tak v Podmanu, avšak z důvodů některých nekompatibilit a inkonzistence chování Podmana je adresa hostitele řešena takto.
+
+Nastavení proměnných pro správný běch aplikace:
+SERVER_NAME= doména serveru shodná s doménou certifikátu. Př. praxe.osu.cz, praxe.cz apod.
+SERVER_IP= IP adresa hostitele (tam, kde je spuštěný Podman / Docker)
+
+SQL_HOST= alias, pomocná proměnná, může být cokoli. Př. sqlhost..
+SQL_HOST_IP= adresa DB serveru
+
+SSL_PATH= cesta k certifikátu pro backed
+SSL_PASSWORD= passphrase certifikátu
