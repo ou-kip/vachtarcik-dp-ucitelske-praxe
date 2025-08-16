@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 var cert = new X509Certificate2("/app/Ssl/praxeosucz.pfx", "testing");
 
 builder.WebHost.ConfigureKestrel(options =>
-{    
+{
     options.ListenAnyIP(8081, listenOptions =>
     {
         listenOptions.UseHttps(cert);

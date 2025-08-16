@@ -12,6 +12,11 @@ const LoginForm: React.FC = () => {
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
+        if (!isEmailValid(email)) {
+            setMessage("Zadejte platný email.");
+            return;
+        }
+
         try {
             axios.defaults.baseURL = 'https://praxeosu.cz:5001';
             const response = await axios.post('/api/v1/auth/login',
@@ -36,12 +41,33 @@ const LoginForm: React.FC = () => {
         navigate(path);
     };
 
+    const isEmailValid = (value: string) => {
+        if (value === "admin") {
+            return true; 
+        }
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailPattern.test(value) ? true : false;
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setEmail(value);
+    };
+
     return (
         <form onSubmit={handleSubmit} className="login-form">
             <h1 className="form-title">Portál pro zadávání praxí</h1>
             <div className="input-container">
                 <label className="username-container">
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="input-labeled" autoComplete="username" placeholder="Email"/>
+                    <input
+                        type="text"
+                        value={email}
+                        onChange={handleChange}
+                        className="input-labeled"
+                        autoComplete="email"
+                        placeholder="Email"
+                    />
                 </label>
             </div>
             <div>
