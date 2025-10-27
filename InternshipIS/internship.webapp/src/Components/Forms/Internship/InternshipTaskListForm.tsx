@@ -1,7 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 import './InternshipTaskListForm.css'
-import axios from 'axios';
 import { Task } from '../../Exports/Task';
+import InternshipApi from '../../Exports/InternshipApi';
 
 interface InternshipTaskListFormProps {
     internshipId: string | null | undefined;
@@ -25,8 +25,7 @@ const InternshipTaskListForm: React.FC<InternshipTaskListFormProps> = ({ interns
 
     useEffect(() => {
         if (isUpdate && internshipId) {
-            axios.defaults.baseURL = 'https://praxeosu.cz:5005';
-            axios.get(`/api/v1/internship/task/getCollection?InternshipId=${internshipId}`, { withCredentials: true })
+            InternshipApi.get(`/api/v1/internship/task/getCollection?InternshipId=${internshipId}`, { withCredentials: true })
                 .then(response => {
                     if (response.data && response.data.data.tasks) {
                         setTasks(response.data.data.tasks);

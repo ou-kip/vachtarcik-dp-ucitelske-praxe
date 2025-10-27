@@ -1,11 +1,11 @@
 ﻿import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { Account } from '../../../Exports/Account';
-import axios from 'axios';
 import PersonTypeSelect from '../../../Inputs/PersonTypeSelect/PersonTypeSelect';
 import ThrashIcon from '../../../../assets/trash3-fill.svg';
 import { AuthContext } from '../../../../Components/AuthProvider';
 import './AccountsListForm.css';
 import AuthApi from '../../../Exports/AuthApi';
+import InternshipApi from '../../../Exports/InternshipApi'
 
 interface ApiResponse {
     statusCode: number;
@@ -40,11 +40,9 @@ const AccountsListForm: React.FC = () => {
     const authContext = useContext(AuthContext);
     const [userRole, setUserRole] = useState<string | null>(null);
 
-    axios.defaults.baseURL = 'https://praxeosu.cz:5005';
-
     const loadAccounts = useCallback(async () => {
         try {
-            const response = await axios.get<ApiResponse>('/api/v1/person/getall/', {
+            const response = await InternshipApi.get<ApiResponse>('/api/v1/person/getall/', {
                 withCredentials: true,
                 params: {
                     offset,

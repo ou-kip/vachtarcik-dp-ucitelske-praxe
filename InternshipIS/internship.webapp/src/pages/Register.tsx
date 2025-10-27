@@ -1,16 +1,15 @@
 ﻿import React from 'react';
 import RegisterSelfForm from '../Components/Forms/Register/RegisterSelfForm';
 import { useSearchParams } from "react-router-dom";
-import axios from 'axios';
 import SystemMessageForm from '../Components/Forms/SystemMessageForm/SystemMessageForm';
+import AuthApi from '../Components/Exports/AuthApi';
 
 const Register: React.FC = () => {
     const [searchParams] = useSearchParams();
     const token = searchParams.get('token');
 
     const handleSuccess = async () => {
-        axios.defaults.baseURL = 'https://praxeosu.cz:5001';
-        await axios.post('/api/v1/auth/register/confirmn', { token: token }, {withCredentials: false});
+        await AuthApi.post('/api/v1/auth/register/confirmn', { token: token }, {withCredentials: false});
     };
 
     return (

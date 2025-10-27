@@ -1,10 +1,10 @@
 ﻿import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import './InternshipTaskCreateUpdateForm.css'
 import { TaskLink } from '../../Exports/TaskLink';
 import { UploadedFile } from '../../Exports/UploadedFile';
 import CustomCheckbox from '../../Inputs/Checkbox/Checkbox';
 import TaskStateSelect from '../../Inputs/TaskStateSelect/TaskStateSelect';
+import InternshipApi from '../../Exports/InternshipApi';
 
 interface InternshipTaskListFormProps {
     internshipId: string | null;
@@ -40,11 +40,9 @@ const InternshipTaskCreateUpdateForm: React.FC<InternshipTaskListFormProps> = ({
 
     const [newFiles, setNewFiles] = useState<File[]>([]);
 
-    axios.defaults.baseURL = 'https://praxeosu.cz:5005';
-
     useEffect(() => {
         if (taskId != null) {
-            axios.get(`/api/v1/internship/task/get?Id=${taskId}`, { withCredentials: true })
+            InternshipApi.get(`/api/v1/internship/task/get?Id=${taskId}`, { withCredentials: true })
                 .then(response => {
                     if (response.data && response.data.data.task) {
                         const taskData = response.data.data.task;
@@ -105,7 +103,7 @@ const InternshipTaskCreateUpdateForm: React.FC<InternshipTaskListFormProps> = ({
         if (!taskId) return;
 
         try {
-            const response = await axios.post(
+            const response = await InternshipApi.post(
                 '/api/v1/file/download',
                 { parentId: taskId, fileName: fileName },
                 {
@@ -143,7 +141,7 @@ const InternshipTaskCreateUpdateForm: React.FC<InternshipTaskListFormProps> = ({
                     State: formData.state ?? 0
                 };
 
-                await axios.post('/api/v1/internship/task/update', payload, { withCredentials: true });
+                await InternshipApi.post('/api/v1/internship/task/update', payload, { withCredentials: true });
             }
             else {
                 const payload = {
@@ -158,7 +156,7 @@ const InternshipTaskCreateUpdateForm: React.FC<InternshipTaskListFormProps> = ({
                     InternshipId: internshipId
                 };
 
-                const response = await axios.post('/api/v1/internship/task/create', payload, { withCredentials: true });
+                const response = await InternshipApi.post('/api/v1/internship/task/create', payload, { withCredentials: true });
                 taskId = response.data.data.id;
             }
 
@@ -167,7 +165,7 @@ const InternshipTaskCreateUpdateForm: React.FC<InternshipTaskListFormProps> = ({
                     const formData = new FormData();
                     formData.append('TaskId', taskId as string);
                     formData.append('File', file);
-                    return axios.post('/api/v1/file/task/upload', formData, {
+                    return InternshipApi.post('/api/v1/file/task/upload', formData, {
                         withCredentials: true,
                         headers: { 'Content-Type': 'multipart/form-data' }
                     });

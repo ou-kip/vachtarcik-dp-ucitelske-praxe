@@ -1,6 +1,5 @@
 ﻿import React from 'react';
 import './DashboardForm.css'
-import axios from 'axios';
 import InternshipTaskEvaluationListForm from '../Task/InternshipTaskEvaluationListForm';
 import Calendar from './Calendar';
 
@@ -9,8 +8,6 @@ interface DashboardFormProps {
 }
 
 const DashboardForm: React.FC<DashboardFormProps> = ({ userRole }) => {
-
-    axios.defaults.baseURL = 'https://praxeosu.cz:5005';
 
     return (
         <div className="container-fluid">

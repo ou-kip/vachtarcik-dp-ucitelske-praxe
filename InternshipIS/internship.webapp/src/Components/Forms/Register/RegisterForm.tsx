@@ -1,6 +1,6 @@
 ﻿import React, { useState } from 'react';
-import axios from 'axios';
 import SystemMessageForm from '../SystemMessageForm/SystemMessageForm';
+import AuthApi from '../../Exports/AuthApi';
 
 const formStyle: React.CSSProperties = {
     fontFamily: 'Roboto, Arial, sans-serif',
@@ -61,15 +61,13 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ selectedItem }) => {
         event.preventDefault();
 
         try {
-
-            axios.defaults.baseURL = 'https://praxeosu.cz:5001';
             let response;
             let displayResponse = '';
 
             switch (selectedItem) {
-                case 'registerStudent': response = await axios.post('/api/v1/auth/register/student', { code: username, name: name, lastName: lastName, email: email, username: email, password: password }, { withCredentials: true }); break;
-                case 'registerTeacher': response = await axios.post('/api/v1/auth/register/teacher', { name: name, lastName: lastName, email: email, username: email, password: password }, { withCredentials: true }); break;
-                case 'registerPerson': response = await axios.post('/api/v1/auth/register/relative', { name: name, lastName: lastName, email: email, username: email, password: password, companyName: company }, { withCredentials: true }); break;
+                case 'registerStudent': response = await AuthApi.post('/api/v1/auth/register/student', { code: username, name: name, lastName: lastName, email: email, username: email, password: password }, { withCredentials: true }); break;
+                case 'registerTeacher': response = await AuthApi.post('/api/v1/auth/register/teacher', { name: name, lastName: lastName, email: email, username: email, password: password }, { withCredentials: true }); break;
+                case 'registerPerson': response = await AuthApi.post('/api/v1/auth/register/relative', { name: name, lastName: lastName, email: email, username: email, password: password, companyName: company }, { withCredentials: true }); break;
             }
 
             if (response?.data.statusCode === 201) {

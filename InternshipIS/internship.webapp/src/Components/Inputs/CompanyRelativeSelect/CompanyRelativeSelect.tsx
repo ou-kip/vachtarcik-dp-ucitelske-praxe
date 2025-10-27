@@ -1,9 +1,9 @@
 ﻿import DropdownDbSelect from '../DropdownDbSelect/DropdownDbSelect'
 import { CompanyRelative } from '../../Exports/CompanyRelative';
-import axios from 'axios';
+import InternshipApi from '../../Exports/InternshipApi';
 
 const fetchRelatives = async (): Promise<CompanyRelative[]> => {
-    const response = await axios.get('api/v1/person/getrelatives', { withCredentials: true });
+    const response = await InternshipApi.get('api/v1/person/getrelatives', { withCredentials: true });
     return response.data?.data?.companyRelatives || [];
 };
 

@@ -1,6 +1,6 @@
 ﻿import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import AuthApi from '../../Exports/AuthApi';
 
 const PasswordResetForm: React.FC = () => {
     const navigate = useNavigate();
@@ -13,9 +13,7 @@ const PasswordResetForm: React.FC = () => {
         event.preventDefault();
 
         try {
-
-            axios.defaults.baseURL = 'https://praxeosu.cz:5001';
-            const response = await axios.post('/api/v1/auth/password/reset', { email: email }, { withCredentials: true });
+            const response = await AuthApi.post('/api/v1/auth/password/reset', { email: email }, { withCredentials: true });
 
             if (response.status === 200) {
                 setSuccess(true);

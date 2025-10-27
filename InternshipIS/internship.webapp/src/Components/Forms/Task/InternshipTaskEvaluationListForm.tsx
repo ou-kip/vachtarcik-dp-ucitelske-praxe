@@ -1,9 +1,9 @@
 ﻿import React, { useState, useEffect } from 'react';
 import './InternshipTaskEvaluationListForm.css'
-import axios from 'axios';
 import { RichTask } from '../../Exports/RichTask';
 import { useNavigate } from 'react-router-dom';
 import InternshipIcon from '../../../assets/briefcase-fill.svg';
+import InternshipApi from '../../Exports/InternshipApi';
 
 interface InternshipTaskEvaluationListFormProps {
     createdByMe: boolean,
@@ -29,9 +29,7 @@ const InternshipTaskEvaluationListForm: React.FC<InternshipTaskEvaluationListFor
     const navigate = useNavigate();
 
     useEffect(() => {
-
-        axios.defaults.baseURL = 'https://praxeosu.cz:5005';
-        axios.get("/api/v1/internship/task/filter/getCollection", { withCredentials: true, params: { createdByMe: createdByMe, filterProperty: filterProperty, orderProperty: orderProperty, orderDirection: orderDirection, filterValue: filterValue } })
+        InternshipApi.get("/api/v1/internship/task/filter/getCollection", { withCredentials: true, params: { createdByMe: createdByMe, filterProperty: filterProperty, orderProperty: orderProperty, orderDirection: orderDirection, filterValue: filterValue } })
             .then(response => {
                 if (response.data && response.data.data.tasks) {
                     setTasks(response.data.data.tasks);

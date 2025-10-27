@@ -1,9 +1,9 @@
 ﻿import '../Menu/MainMenu.css'
 import logo from '../../assets/logo-osu-sm.svg';
 import React, { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
 import { AuthContext } from '../AuthProvider';
 import { useNavigate } from "react-router-dom";
+import AuthApi from '../Exports/AuthApi';
 
 const MainMenu: React.FC = () => {
     const navigate = useNavigate();
@@ -32,10 +32,7 @@ const MainMenu: React.FC = () => {
     }
 
     const logout = async () => {
-
-        axios.defaults.baseURL = 'https://praxeosu.cz:5001';
-        await axios.post('/api/v1/auth/logout', {}, { withCredentials: true });
-
+        await AuthApi.post('/api/v1/auth/logout', {}, { withCredentials: true });
         navigate('/');
     }
 

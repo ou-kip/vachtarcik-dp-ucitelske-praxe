@@ -1,9 +1,9 @@
 ﻿import React, { useEffect, useState } from 'react';
 import './Calendar.css';
-import axios from 'axios';
 import { CalendarEvent } from '../../Exports/CalendarEvent';
 import ArrowLeft from '../../../assets/arrow-left-square-fill.svg';
 import ArrowRight from '../../../assets/arrow-right-square-fill.svg';
+import InternshipApi from '../../Exports/InternshipApi';
 
 const Calendar: React.FC = () => {
     const [events, setEvents] = useState<CalendarEvent[]>([]);
@@ -26,8 +26,7 @@ const Calendar: React.FC = () => {
     const isMobile = window.innerWidth <= 768;
 
     useEffect(() => {
-        axios.defaults.baseURL = 'https://praxeosu.cz:5005';
-        axios.get("/api/v1/calendar/get", { withCredentials: true })
+        InternshipApi.get("/api/v1/calendar/get", { withCredentials: true })
             .then(response => {
                 if (response.data?.data?.events) {
                     setEvents(response.data.data.events);

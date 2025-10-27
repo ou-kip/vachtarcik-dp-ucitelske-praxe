@@ -1,7 +1,7 @@
 ﻿import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import './LoginForm.css';
+import AuthApi from '../../Exports/AuthApi';
 
 const LoginForm: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -13,8 +13,7 @@ const LoginForm: React.FC = () => {
         event.preventDefault();
 
         try {
-            axios.defaults.baseURL = 'https://praxeosu.cz:5001';
-            const response = await axios.post('/api/v1/auth/login',
+            const response = await AuthApi.post('/api/v1/auth/login',
                 { email, password },
                 { withCredentials: true }
             );

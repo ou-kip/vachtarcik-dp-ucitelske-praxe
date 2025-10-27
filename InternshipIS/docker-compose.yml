@@ -48,8 +48,8 @@ services:
      context: .
      dockerfile: internship.webapp/Dockerfile
      args:
-        VITE_INTERNSHIPS_API_BASE_URL: https://praxeosu.cz:5005
-        VITE_AUTH_API_BASE_URL: https://praxeosu.cz:5001
+        VITE_INTERNSHIPS_API_BASE_URL: https://${SERVER_NAME}:5005
+        VITE_AUTH_API_BASE_URL: https://${SERVER_NAME}:5001
     ports:
       - "443:443"
     volumes:
@@ -59,11 +59,11 @@ services:
     environment:
       - NODE_ENV=production
       - HTTPS=true
-      - VITE_INTERNSHIPS_API_BASE_URL=https://praxeosu.cz:5005
-      - VITE_AUTH_API_BASE_URL=https://praxeosu.cz:5001
+      - VITE_INTERNSHIPS_API_BASE_URL=https://${SERVER_NAME}:5005
+      - VITE_AUTH_API_BASE_URL=https://${SERVER_NAME}:5001
       - SERVER_NAME=praxeosu.cz
     extra_hosts:
-      - "praxeosu.cz: 192.168.0.3"
+      - "${SERVER_NAME}:${SERVER_IP}"
     env_file: .env
 
   rabbitmq:
