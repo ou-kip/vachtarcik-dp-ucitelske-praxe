@@ -1,7 +1,7 @@
 ﻿import React, { useState } from 'react';
-import axios from 'axios';
 import './RegisterSelfForm.css';
 import SystemMessageForm from '../SystemMessageForm/SystemMessageForm';
+import AuthApi from '../../Exports/AuthApi';
 
 /*const accountTypes = ['Student', 'Učitel', 'Firemní osoba'];*/
 
@@ -22,13 +22,11 @@ const RegisterSelfForm: React.FC = () => {
         event.preventDefault();
 
         try {
-
-            axios.defaults.baseURL = 'https://praxeosu.cz:5001';
             let response;
             let displayResponse = '';
 
             switch (activeType) {
-                case 'Student': response = await axios.post('/api/v1/auth/register/student', { code: username, name: name, lastName: lastName, email: email, username: email, password: password }, { withCredentials: true }); break;
+                case 'Student': response = await AuthApi.post('/api/v1/auth/register/student', { code: username, name: name, lastName: lastName, email: email, username: email, password: password }, { withCredentials: true }); break;
                 //case 'Učitel': response = await axios.post('/api/v1/auth/register/teacher', { name: name, lastName: lastName, email: email, username: email, password: password }, { withCredentials: true }); break;
                 //case 'Firemní osoba': response = await axios.post('/api/v1/auth/register/relative', { name: name, lastName: lastName, email: email, username: email, password: password, companyName: company }, { withCredentials: true }); break;
             }

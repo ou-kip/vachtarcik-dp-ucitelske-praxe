@@ -1,6 +1,5 @@
 ﻿import { useState, useEffect } from 'react';
 import './InternshipCreateUpdateForm.css';
-import axios from 'axios';
 import { CompanyRelative } from '../../Exports/CompanyRelative';
 import { InternshipLink } from '../../Exports/InternshipLink';
 import StudentSelect from '../../Inputs/StudentSelect/StudentSelect';
@@ -11,6 +10,7 @@ import InternshipStateSelect from '../../Inputs/InternshipStateSelect/Internship
 import { Student } from '../../Exports/Student';
 import { Teacher } from '../../Exports/Teacher';
 import { InternshipCategory } from '../../Exports/InternshipCategory';
+import InternshipApi from '../../Exports/InternshipApi';
 
 const steps = [
     'Základní údaje',
@@ -53,11 +53,9 @@ const InternshipCreateUpdateForm = ({
         state: 0
     });
 
-    axios.defaults.baseURL = 'https://praxeosu.cz:5005';
-
     useEffect(() => {
         if (isUpdate) {
-            axios.get(`/api/v1/internship/get?InternshipId=${internshipId}`, { withCredentials: true })
+            InternshipApi.get(`/api/v1/internship/get?InternshipId=${internshipId}`, { withCredentials: true })
                 .then(response => {
                     if (response.data && response.data.data.internshipDto) {
                         const internshipData = response.data.data.internshipDto;
@@ -148,7 +146,7 @@ const InternshipCreateUpdateForm = ({
                     State: formData.state
                 };
 
-                await axios.post('/api/v1/internship/update', payload, { withCredentials: true });
+                await InternshipApi.post('/api/v1/internship/update', payload, { withCredentials: true });
                 onSuccess?.(internshipId);
             }
             else {
@@ -165,7 +163,7 @@ const InternshipCreateUpdateForm = ({
                     State: formData.state
                 };
 
-                const response = await axios.post('/api/v1/internship/create', payload, { withCredentials: true });
+                const response = await InternshipApi.post('/api/v1/internship/create', payload, { withCredentials: true });
                 onSuccess?.(response.data.data.id);
             }          
         } catch (error) {

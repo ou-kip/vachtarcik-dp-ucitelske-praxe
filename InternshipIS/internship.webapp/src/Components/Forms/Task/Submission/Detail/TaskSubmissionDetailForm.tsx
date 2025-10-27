@@ -1,7 +1,7 @@
 ﻿import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
 import './TaskSubmissionDetailForm.css'
 import { TaskSolutionDetail } from '../../../../Exports/TaskSolutionDetail';
+import InternshipApi from '../../../../Exports/InternshipApi';
 
 interface SubmissionDetailFormProps {
     taskId: string | null;
@@ -24,11 +24,9 @@ const TaskSubmissionDetailForm: React.FC<SubmissionDetailFormProps> = ({ taskId,
     const [detail, setDetail] = useState<TaskSolutionDetail>();
     const [submittedDateLocale, setSubmittedDateLocale] = useState('');
 
-    axios.defaults.baseURL = 'https://praxeosu.cz:5005';
-
     const fetchData = useCallback(async () => {
         try {
-            const response = await axios.get<ApiResponse>(`/api/v1/internship/task/solution/get?taskId=${taskId}`, { withCredentials: true });
+            const response = await InternshipApi.get<ApiResponse>(`/api/v1/internship/task/solution/get?taskId=${taskId}`, { withCredentials: true });
             setDetail(response.data.data.solution);
 
             if (detail?.submittedDate) {
@@ -55,7 +53,7 @@ const TaskSubmissionDetailForm: React.FC<SubmissionDetailFormProps> = ({ taskId,
         if (!taskId) return;
 
         try {
-            const response = await axios.post(
+            const response = await InternshipApi.post(
                 '/api/v1/file/download',
                 { parentId: detail?.id, fileName: fileName },
                 {

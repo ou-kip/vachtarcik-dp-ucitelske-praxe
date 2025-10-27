@@ -1,9 +1,9 @@
 ﻿import DropdownDbSingleSelect from '../DropdownDbSingleSelect/DropdownDbSingleSelect';
 import { Student } from '../../Exports/Student';
-import axios from 'axios';
+import InternshipApi from '../../Exports/InternshipApi';
 
 const fetchStudents = async (): Promise<Student[]> => {
-    const response = await axios.get('api/v1/person/getstudents', { withCredentials: true });
+    const response = await InternshipApi.get('api/v1/person/getstudents', { withCredentials: true });
     return response.data?.data?.students || [];
 };
 

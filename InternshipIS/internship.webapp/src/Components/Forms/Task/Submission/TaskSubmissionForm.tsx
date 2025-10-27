@@ -1,7 +1,7 @@
 ﻿import React, { useState } from 'react';
-import axios from 'axios';
 import './TaskSubmissionForm.css'
 import { UploadedFile } from '../../../Exports/UploadedFile';
+import InternshipApi from '../../../Exports/InternshipApi';
 
 interface TaskSubmissionFormProps {
     taskId: string | null;
@@ -20,8 +20,6 @@ const TaskSubmissionForm: React.FC<TaskSubmissionFormProps> = ({ taskId, onSubmi
     });
 
     const [newFiles, setNewFiles] = useState<File[]>([]);
-
-    axios.defaults.baseURL = 'https://praxeosu.cz:5005';
 
     type FormDataKeys = keyof typeof formData;
     type FormDataValues = string;
@@ -43,7 +41,7 @@ const TaskSubmissionForm: React.FC<TaskSubmissionFormProps> = ({ taskId, onSubmi
                 Solution: formData.solution,
             };
 
-            const response = await axios.post('/api/v1/internship/task/solution/create', payload, { withCredentials: true });
+            const response = await InternshipApi.post('/api/v1/internship/task/solution/create', payload, { withCredentials: true });
             const solutionId = response.data.data.solutionId;
 
             if (newFiles.length && taskId) {
@@ -51,7 +49,7 @@ const TaskSubmissionForm: React.FC<TaskSubmissionFormProps> = ({ taskId, onSubmi
                     const formData = new FormData();
                     formData.append('SolutionId', solutionId as string);
                     formData.append('File', file);
-                    return axios.post('/api/v1/file/solution/upload', formData, {
+                    return InternshipApi.post('/api/v1/file/solution/upload', formData, {
                         withCredentials: true,
                         headers: { 'Content-Type': 'multipart/form-data' }
                     });
@@ -65,7 +63,6 @@ const TaskSubmissionForm: React.FC<TaskSubmissionFormProps> = ({ taskId, onSubmi
             console.error('Chyba při odesílání:', error);
         }
     };
-
 
     return (
         <div className="content">

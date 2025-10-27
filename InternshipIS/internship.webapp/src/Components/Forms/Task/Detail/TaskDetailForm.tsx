@@ -1,10 +1,10 @@
 ﻿import React, { useState, useEffect, useCallback } from 'react';
 import './TaskDetailForm.css'
 import { TaskDetail } from '../../../Exports/TaskDetail';
-import axios from 'axios';
 import TaskSubmissionForm from '../Submission/TaskSubmissionForm';
 import TaskSubmissionDetailForm from '../Submission/Detail/TaskSubmissionDetailForm';
 import { AllowedActions } from '../../../Exports/AllowedActions'; 
+import InternshipApi from '../../../Exports/InternshipApi';
 
 interface TaskDetailFormProps {
     taskId: string | null;
@@ -40,11 +40,9 @@ const TaskDetailForm: React.FC<TaskDetailFormProps> = ({ taskId }) => {
     const [showSubmissionDetailForm, setShowSubmissionDetailForm] = useState(false);
     const [allowedActions, setAllowedActions] = useState<AllowedActions>();
 
-    axios.defaults.baseURL = 'https://praxeosu.cz:5005';
-
     const fetchData = useCallback(async () => {
         try {
-            const response = await axios.get<ApiResponse>(`/api/v1/internship/task/get?Id=${taskId}`, { withCredentials: true });
+            const response = await InternshipApi.get<ApiResponse>(`/api/v1/internship/task/get?Id=${taskId}`, { withCredentials: true });
             setDetail(response.data.data.task);
 
         } catch (error) {
@@ -61,7 +59,7 @@ const TaskDetailForm: React.FC<TaskDetailFormProps> = ({ taskId }) => {
             if (!detail?.internshipId) return;
 
             try {
-                const allowedResponse = await axios.get<AllowedApiResponse>(
+                const allowedResponse = await InternshipApi.get<AllowedApiResponse>(
                     '/api/v1/internship/get/allowedactions',
                     {
                         params: { internshipId: detail.internshipId },
@@ -91,7 +89,7 @@ const TaskDetailForm: React.FC<TaskDetailFormProps> = ({ taskId }) => {
         if (!taskId) return;
 
         try {
-            const response = await axios.post(
+            const response = await InternshipApi.post(
                 '/api/v1/file/download',
                 { parentId: taskId, fileName: fileName },
                 {

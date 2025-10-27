@@ -1,6 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import './CompanySelect.css'
+import InternshipApi from '../../Exports/InternshipApi';
 
 interface CustomSelectProps {
     selectedCompany: string | null;
@@ -38,8 +38,7 @@ const CompanySelect: React.FC<CustomSelectProps> = ({
         /*setError(null);*/
 
         try {
-            axios.defaults.baseURL = 'https://praxeosu.cz:5005';
-            const response = await axios.get('api/v1/internshipcompany/company/getcollection', { withCredentials: true })
+            const response = await InternshipApi.get('api/v1/internshipcompany/company/getcollection', { withCredentials: true })
 
             if (response.data && response.data.data && Array.isArray(response.data.data.companyNames)) {
                 setCompanies(response.data.data.companyNames);

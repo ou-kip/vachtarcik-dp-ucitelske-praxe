@@ -1,9 +1,9 @@
 ﻿import React, { useState, useEffect } from 'react';
 import './InternshipDetailForm.css'
 import { InternshipDetail } from '../../../Exports/InternshipDetail';
-import axios from 'axios';
 import InternshipTaskListForm from '../InternshipTaskListForm';
 import { useNavigate } from 'react-router-dom';
+import InternshipApi from '../../../Exports/InternshipApi';
 
 interface InternshipDetailFormProps {
     internshipId: string | null;
@@ -27,12 +27,10 @@ const InternshipDetailForm: React.FC<InternshipDetailFormProps> = ({ internshipI
     const taskListRefreshKey = 0;
     const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
 
-    axios.defaults.baseURL = 'https://praxeosu.cz:5005';
-
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get<ApiResponse>(`/api/v1/internship/get?InternshipId=${internshipId}`, { withCredentials: true });
+                const response = await InternshipApi.get<ApiResponse>(`/api/v1/internship/get?InternshipId=${internshipId}`, { withCredentials: true });
                 setDetail(response.data.data.internshipDto);
             } catch (error) {
                 alert('Chyba při načítání dat:' + { error });
@@ -67,7 +65,7 @@ const InternshipDetailForm: React.FC<InternshipDetailFormProps> = ({ internshipI
         if (!internship || !internship.id) return;
 
         try {
-            const response = await axios.post(
+            const response = await InternshipApi.post(
                 '/api/v1/internship/get/export',
                 { internshipId: internship.id },
                 {

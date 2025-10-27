@@ -1,9 +1,9 @@
 ﻿import DropdownDbSelect from '../DropdownDbSelect/DropdownDbSelect'
-import axios from 'axios';
+import InternshipApi from '../../Exports/InternshipApi';
 import { Teacher } from '../../Exports/Teacher';
 
 const fetchTeachers = async (): Promise<Teacher[]> => {
-    const response = await axios.get('api/v1/person/getteachers', { withCredentials: true });
+    const response = await InternshipApi.get('api/v1/person/getteachers', { withCredentials: true });
     return response.data?.data?.teachers || [];
 };
 

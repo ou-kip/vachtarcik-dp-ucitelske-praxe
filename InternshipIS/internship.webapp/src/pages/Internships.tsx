@@ -4,7 +4,6 @@ import MainMenu from '../Components/Menu/MainMenu'
 import '../css/Internships.css'
 //import { useSearchParams } from "react-router-dom";
 import { AuthContext } from '../Components/AuthProvider';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import CustomCheckbox from '../Components/Inputs/Checkbox/Checkbox';
 import { CompanyRelative } from '../Components/Exports/CompanyRelative';
@@ -16,6 +15,7 @@ import ThrashIcon from '../assets/trash3-fill.svg';
 import PickIcon from '../assets/calendar-check-fill.svg';
 import EditIcon from '../assets/pencil-square.svg';
 import SystemMessageForm from '../Components/Forms/SystemMessageForm/SystemMessageForm';
+import InternshipApi from '../Components/Exports/InternshipApi';
 
 interface Internship {
     id: string;
@@ -59,8 +59,6 @@ const Internships: React.FC = () => {
     //const [showDeletion, setShowDeletion] = useState(false);
     //const [showAssignation, setShowAssignation] = useState(false);
     
-    axios.defaults.baseURL = 'https://praxeosu.cz:5005';
-
     useEffect(() => {
         const loadRole = async () => {
             if (authContext) {
@@ -79,7 +77,7 @@ const Internships: React.FC = () => {
 
     const fetchData = async (column?: string | null, direction?: number, isCreatedByMe?: boolean) => {
         try {
-            const response = await axios.get<ApiResponse>(`/api/v1/internship/getcollection?OrderProperty=${column}&OrderDirection=${direction}&CreatedByMe=${isCreatedByMe}`,
+            const response = await InternshipApi.get<ApiResponse>(`/api/v1/internship/getcollection?OrderProperty=${column}&OrderDirection=${direction}&CreatedByMe=${isCreatedByMe}`,
                 {
                     withCredentials: true,
                 });
@@ -92,7 +90,7 @@ const Internships: React.FC = () => {
 
     const deleteInternship = async (internshipId: string | null) => {
         try {
-            await axios.delete(`/api/v1/internship/delete?Id=${internshipId}`,
+            await InternshipApi.delete(`/api/v1/internship/delete?Id=${internshipId}`,
                 {
                     withCredentials: true,
                 });
@@ -116,7 +114,7 @@ const Internships: React.FC = () => {
 
     const assignToMe = async (internshipId: string | null) => {
         try {
-            await axios.post(`/api/v1/internship/assigntome?InternshipId=${internshipId}`, {},
+            await InternshipApi.post(`/api/v1/internship/assigntome?InternshipId=${internshipId}`, {},
                 {
                     withCredentials: true,
                 });

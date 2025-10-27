@@ -1,10 +1,9 @@
 ﻿import DropdownDbSingleSelect from '../DropdownDbSingleSelect/DropdownDbSingleSelect';
 import { InternshipCategory } from '../../Exports/InternshipCategory';
-import axios from 'axios';
+import InternshipApi from '../../Exports/InternshipApi';
 
 const fetchCategories = async (): Promise<InternshipCategory[]> => {
-    axios.defaults.baseURL = 'https://praxeosu.cz:5005';
-    const response = await axios.get('api/v1/internship/get/categories', { withCredentials: true });
+    const response = await InternshipApi.get('api/v1/internship/get/categories', { withCredentials: true });
     return response.data?.data?.categories || [];
 };
 
